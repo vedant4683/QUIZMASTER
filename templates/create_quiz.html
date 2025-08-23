@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block title %}Create Quiz - QuizMaster{% endblock
+%} {% block content %}
+<h1>Create a New Quiz</h1>
+<form method="POST" action="{{ url_for('create_quiz') }}">
+  <label for="title">Quiz Title:</label><br />
+  <input type="text" id="title" name="title" required size="50" /><br /><br />
+
+  <label for="description">Description:</label><br />
+  <textarea id="description" name="description" rows="4" cols="50"></textarea
+  ><br /><br />
+
+  <label for="time_limit">Time Limit (in minutes):</label><br />
+  <input
+    type="number"
+    id="time_limit"
+    name="time_limit"
+    value="1"
+    required
+  /><br /><br />
+
+  <button type="submit">Create Quiz</button>
+</form>
+<br />
+<a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+{% endblock %}

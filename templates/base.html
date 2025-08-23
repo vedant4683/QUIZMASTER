@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}QuizMaster{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="container">
+        <a href="{{ url_for('home') }}">QuizMaster Home</a>
+        <ul style="float: right; list-style-type: none">
+          {% if current_user.is_authenticated %}
+          <li style="display: inline; margin-left: 20px">
+            Welcome, {{ current_user.username }}
+          </li>
+          <li style="display: inline; margin-left: 20px">
+            <a href="{{ url_for('logout') }}">Logout</a>
+          </li>
+          {% else %}
+          <li style="display: inline; margin-left: 20px">
+            <a href="{{ url_for('login') }}">Login</a>
+          </li>
+          <li style="display: inline; margin-left: 20px">
+            <a href="{{ url_for('register') }}">Register</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <hr />
+
+    <div class="container">{% block content %}{% endblock %}</div>
+  </body>
+</html>

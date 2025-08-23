@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %}Questions for {{ quiz.title }}{%
+endblock %} {% block content %}
+<h1>Questions for: {{ quiz.title }}</h1>
+
+<table border="1" width="100%">
+  <thead>
+    <tr>
+      <th>Question ID</th>
+      <th>Text</th>
+      <th>Correct Answer</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for question in quiz.questions %}
+    <tr>
+      <td>{{ question.id }}</td>
+      <td>{{ question.text }}</td>
+      <td>{{ question.correct_answer.upper() }}</td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="3">This quiz has no questions yet.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<br />
+<a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+{% endblock %}

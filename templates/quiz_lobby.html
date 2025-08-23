@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %}Quiz Lobby - QuizMaster{% endblock %}
+{% block content %}
+<h1>Available Quizzes</h1>
+<a href="{{ url_for('admin_dashboard') }}">Back to Dashboard</a>
+<hr />
+
+{% for quiz in quizzes %}
+<h2>{{ quiz.title }}</h2>
+<p>{{ quiz.description }}</p>
+<a href="{{ url_for('take_quiz', quiz_id=quiz.id) }}">Start Quiz</a>
+<hr />
+{% else %}
+<p>No quizzes are available at the moment. Please check back later.</p>
+{% endfor %} {% endblock %}

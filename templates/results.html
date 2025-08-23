@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block title %}Quiz Results - QuizMaster{% endblock
+%} {% block content %}
+<h1>Quiz Results for: {{ quiz.title }}</h1>
+<h2>Your Final Score: {{ score }} out of {{ total }}</h2>
+<hr />
+
+<h3>Here's a review of your answers:</h3>
+
+{% for result in results_data %}
+<h4>{{ result.question_text }}</h4>
+<p>Your Answer: {{ result.submitted_answer }}</p>
+
+{% if result.is_correct %}
+<p style="color: green"><strong>Correct!</strong></p>
+{% else %}
+<p style="color: red">
+  <strong>Incorrect.</strong> The correct answer was: {{ result.correct_answer
+  }}
+</p>
+{% endif %}
+<hr />
+{% endfor %}
+
+<a href="{{ url_for('quizzes') }}">Back to Quiz Lobby</a>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %}Welcome - QuizMaster{% endblock %} {%
+block content %} {% if current_user.is_authenticated %}
+<h1>Welcome to QuizMaster!!!</h1>
+<p>Ready to test your knowledge?</p>
+<p><a href="{{ url_for('quizzes') }}">Go to the Quiz Lobby</a></p>
+
+{% if current_user.role == 'admin' %}
+<p><a href="{{ url_for('admin_dashboard') }}">Go to Admin Dashboard</a></p>
+{% endif %} {% else %}
+<h1>Welcome to QuizMaster!!!</h1>
+<p>The best platform to create and take quizzes.</p>
+<p>Please log in or register using the links in the navigation bar above.</p>
+
+{% endif %} {% endblock %}

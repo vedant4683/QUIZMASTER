@@ -1,0 +1,73 @@
+{% extends "base.html" %} {% block title %}Admin Dashboard - QuizMaster{%
+endblock %} {% block content %}
+<h1>Admin Dashboard</h1>
+<p>Welcome, {{ current_user.username }}!</p>
+<a href="{{ url_for('logout') }}">Logout</a>
+<hr />
+
+<h2>Quiz Management</h2>
+<table border="1" width="100%">
+  <thead>
+    <tr>
+      <th>Quiz ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>No. of Questions</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for quiz in all_quizzes %}
+    <tr>
+      <td>{{ quiz.id }}</td>
+      <td>{{ quiz.title }}</td>
+      <td>{{ quiz.description }}</td>
+      <td>{{ quiz.questions | length }}</td>
+      <td>
+        <a href="{{ url_for('add_question', quiz_id=quiz.id) }}"
+          >Add Question</a
+        >
+        |
+        <a href="{{ url_for('view_questions', quiz_id=quiz.id) }}"
+          >View Questions</a
+        >
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="5">No quizzes have been created yet.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<br />
+<a href="{{ url_for('create_quiz') }}">Create New Quiz</a>
+
+<hr />
+
+<h2>User Management</h2>
+<table border="1" width="100%">
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in all_users %}
+    <tr>
+      <td>{{ user.id }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role }}</td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="4">No users have been registered yet.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
