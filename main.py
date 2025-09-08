@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
     role = db.Column(db.String(20), nullable=False, default='student')
 
 # Inside the Quiz model in main.py
-class Quiz(db.Model):
+class Quiz(db.Model): 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=True)
@@ -228,4 +228,4 @@ def view_questions(quiz_id):
     quiz = Quiz.query.get_or_404(quiz_id)
     # The quiz object already has the questions thanks to db.relationship!
     return render_template('view_questions.html', quiz=quiz)
-#Hello 
+#Hello vedant
