@@ -228,3 +228,4 @@ def view_questions(quiz_id):
     quiz = Quiz.query.get_or_404(quiz_id)
     # The quiz object already has the questions thanks to db.relationship!
     return render_template('view_questions.html', quiz=quiz)
+# hello vedaant
