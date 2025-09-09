@@ -1,8 +1,15 @@
 {% extends "base.html" %} {% block title %}Taking Quiz: {{ quiz.title }}{%
-endblock %} {% block content %}
-<h1>{{ quiz.title }}</h1>
-<p>{{ quiz.description }}</p>
-<hr />
+endblock %} {% block content %} {% if success_message %}
+<div class="alert-success">{{ success_message }}</div>
+{% endif %} {% if error_message %}
+<div class="alert-error">{{ error_message }}</div>
+{% endif %}
+
+<div class="card">
+  <div class="card-title">{{ quiz.title }}</div>
+  <div class="card-desc">{{ quiz.description }}</div>
+  <!-- More quiz info -->
+</div>
 
 <h2>Time Remaining: <span id="timer">{{ quiz.time_limit }}</span></h2>
 
@@ -21,7 +28,7 @@ endblock %} {% block content %}
   {% else %}
   <p>This quiz has no questions yet!</p>
   {% endfor %}
-  <button type="submit">Submit Answers</button>
+  <button class="btn" type="submit">Submit</button>
 </form>
 
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>

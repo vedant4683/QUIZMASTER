@@ -31,7 +31,8 @@ class Quiz(db.Model):
     description = db.Column(db.Text, nullable=True)
     # Add this new column
     time_limit = db.Column(db.Integer, nullable=False, default=60)
-    questions = db.relationship('Question', backref='quiz', lazy=True)
+   # Inside the Quiz model
+    questions = db.relationship('Question', backref='quiz', lazy=True, cascade="all, delete")  
     
 
 class Question(db.Model):
@@ -228,4 +229,21 @@ def view_questions(quiz_id):
     quiz = Quiz.query.get_or_404(quiz_id)
     # The quiz object already has the questions thanks to db.relationship!
     return render_template('view_questions.html', quiz=quiz)
-# hello vedaant
+
+@app.route('/quiz/<int:quiz_id>/delete')
+@login_required
+def delete_quiz(quiz_id):
+    # Only admins can delete quizzes
+    if current_user.role != 'admin':
+        abort(403)
+    
+    # Find the quiz by its ID, or show a 404 page if it doesn't exist
+    quiz_to_delete = Quiz.query.get_or_404(quiz_id)
+    
+    try:
+        # Delete the quiz. The cascade rule we added will auto-delete its questions.
+        db.session.delete(quiz_to_delete)
+        db.session.commit()
+        return redirect(url_for('admin_dashboard'))
+    except:
+        return "There was an issue deleting the quiz."

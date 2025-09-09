@@ -1,14 +1,35 @@
-{% extends "base.html" %} {% block title %}Welcome - QuizMaster{% endblock %} {%
-block content %} {% if current_user.is_authenticated %}
-<h1>Welcome to QuizMaster!!!</h1>
-<p>Ready to test your knowledge?</p>
-<p><a href="{{ url_for('quizzes') }}">Go to the Quiz Lobby</a></p>
-
-{% if current_user.role == 'admin' %}
-<p><a href="{{ url_for('admin_dashboard') }}">Go to Admin Dashboard</a></p>
-{% endif %} {% else %}
-<h1>Welcome to QuizMaster!!!</h1>
-<p>The best platform to create and take quizzes.</p>
-<p>Please log in or register using the links in the navigation bar above.</p>
-
-{% endif %} {% endblock %}
+<!-- filepath: c:\Users\vedant shinde\QUIZMASTER\templates\home.html -->
+{% extends "base.html" %} {% block title %}Home | QuizMaster{% endblock %} {%
+block content %}
+<div style="text-align: center">
+  <h1>Welcome to QuizMaster!</h1>
+  <p>Challenge yourself, learn, and have fun with our quizzes.</p>
+  <img
+    src="{{ url_for('static', filename='images/quiz_banner.jpg') }}"
+    alt="Quiz Banner"
+    style="
+      max-width: 50%;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      margin-bottom: 24px;
+    "
+  />
+  <div>
+    <img
+      src="{{ url_for('static', filename='images/brain.png') }}"
+      alt="Brain"
+      style="width: 120px; margin: 12px"
+    />
+    <img
+      src="{{ url_for('static', filename='images/book.png') }}"
+      alt="Books"
+      style="width: 120px; margin: 12px"
+    />
+    <img
+      src="{{ url_for('static', filename='images/trophy.png') }}"
+      alt="Trophy"
+      style="width: 120px; margin: 12px"
+    />
+  </div>
+</div>
+{% endblock %}
